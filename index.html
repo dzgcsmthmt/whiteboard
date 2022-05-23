@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>white board</title>
+    <style>
+       #canvas{
+           margin: 20px;
+           background: #000;
+       } 
+       button{
+           margin: 20px 4px 0;
+           padding: 8px 12px;
+       }
+       .operation-btn-wrapper{
+           padding-left: 12px;
+       }
+    </style>
+</head>
+<body>
+    <div class="operation-btn-wrapper">
+        <button id="add">添加圆</button>
+        <button id="move">移动圆</button>
+        <button id="undo">undo</button>
+        <button id="redo">redo</button>
+    </div>
+    <canvas id="canvas" width="800px" height="600"></canvas>
+    <script src="./src/index.js" type="module"></script>
+</body>
+</html>

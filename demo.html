@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>fibonacci-canvas</title>
+    <style>
+        canvas {
+            background: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <script>
+
+        var canvas = document.querySelector('canvas');
+        canvas.width = 600;
+        canvas.height = 480;
+        var ctx = canvas.getContext('2d');
+
+        let colorArray = ['#f00','#ff0','#f0f','#0ff','#00f','#f0f','#cc5585','#253384'
+                            ,'#ed5c9f','#15086b','#0b9183','#c41194','#bad891','#f9b898',
+                            '#7b18a5','#d4a5ef','#ff9a16','#e5bf37','#fc767b','#c42366',
+                            '#89f9ba', '#e9ffb2', '#61eda7', '#29d142', '#bbd813', '#35e0d5',
+                            '#9faa25', '#38f454', '#10a574', '#0ab201', '#91f79c', '#a4f9b7',
+                            '#74e0c3', '#95edce', '#428e0b', '#048c4a', '#77e5be', '#33ead2'
+                        ];
+        let radius = 8;
+        
+
+        var coor = {
+            x: 300,
+            y: 240,
+        };
+
+        function draw(r, n, prevR) {
+            if (n > 2) {
+                ctx.beginPath();
+                switch (n % 4) {
+                    case 0:
+                        coor.y = coor.y - radius * prevR;
+                        coor.y = coor.y + radius * r;
+                        ctx.arc(coor.x + radius * r, coor.y, 10, 0, Math.PI * 2, true);
+                        break;
+                    case 1:
+                        coor.x = coor.x + radius * prevR;
+                        coor.x = coor.x - radius * r;
+                        ctx.arc(coor.x, coor.y + radius * r, 10, 0, Math.PI * 2, true);
+                        break;
+                    case 2:
+                        coor.y = coor.y + radius * prevR;
+                        coor.y = coor.y - radius * r;
+                        ctx.arc(coor.x - radius * r, coor.y, 10, 0, Math.PI * 2, true);
+                        break;
+                    case 3:
+                        coor.x = coor.x - radius * prevR;
+                        coor.x = coor.x + radius * r;
+                        ctx.arc(coor.x, coor.y - radius * r, 10, 0, Math.PI * 2, true);
+                        break;
+                }
+                ctx.fillStyle = 'yellow'
+                ctx.fill();
+            }
+            ctx.beginPath();
+            // ctx.arc(coor.x, coor.y + radius * r, 5, 0, Math.PI * 2, true);
+            ctx.arc(coor.x, coor.y, radius * r, Math.PI * 0.5 * (n), Math.PI * 0.5 * (n - 1), true);
+            // if (n > 1) {
+            //     switch (n % 4) {
+            //         case 0:
+            //             ctx.moveTo(coor.x - radius * r, coor.y);
+
+            //             break;
+            //         case 1:
+            //             ctx.moveTo(coor.x, coor.y + radius * r);
+            //             break;
+            //         case 2:
+            //             ctx.moveTo(coor.x + radius * r, coor.y);
+            //             break;
+            //         case 3:
+            //             ctx.moveTo(coor.x, coor.y - radius * r);
+            //             break;
+            //     }
+            // }
+
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = colorArray[(Math.random() * colorArray.length) >> 0];
+            ctx.stroke();
+        }
+
+
+
+        function getFibonacci(n) {
+            var fibarr = [];
+            var i = 0;
+            while (i < n) {
+                if (i <= 1) {
+                    fibarr.push(i);
+                } else {
+                    fibarr.push(fibarr[i - 1] + fibarr[i - 2])
+                }
+                i++;
+            }
+
+            return fibarr;
+        }
+        var data = getFibonacci(10);
+
+        for (var i = 0, l = data.length; i < l; i++) {
+            if (data[i] != 0) {
+                draw(data[i], i, data[i - 1]);
+
+            }
+        }
+    </script>
+</body>
+
+</html>
